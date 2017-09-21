@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.vertFlex {
+  border: 2px solid black;
+  height: 100px;
+  width: 200px;
+
+  /* This is a *vertical* flex container: */
+  display: flex;
+  flex-direction: column;
+}
+
+.horizFlex {
+  border: 2px dotted orange;
+  /* Why is this not clamped to (large) min-content size in Chrome? */
+  flex: 0 0 50px;
+
+  /* This is a *horizontal* flex container: */
+  display: flex;
+}
+
+.scrollable {
+  overflow: scroll;
+}
+
+.tall {
+  width: 100px;
+  height: 400px;
+  background: blue;
+}
+</style>
+</head>
+<body>
+  <div class="vertFlex">
+    <div class="horizFlex">
+      <div class="scrollable">
+        <div class="tall"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
