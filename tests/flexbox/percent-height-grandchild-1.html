@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.outerContainer {
+  display: flex;
+  height: 400px;
+  background: purple;
+}
+
+.containingBlock {
+  flex: 1;
+  background: red;
+}
+
+.content {
+  background: lime;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+  <div class="outerContainer">
+    <div class="containingBlock">
+      <div class="content">
+        This lime region has "height:100%". If that's honored, no red
+        will be visible.
+        <br>
+        <br>
+        (Note that my containing block -- the red region -- has
+        'height:auto', which might seem like something we can't resolve
+        percentages against. Still, its height clearly does not depend
+        on content, because it's being stretched (due to 'align-self:stretch')
+        inside of a single-line horizontal flex container with a fixed height.)
+      </div>
+    </div>
+  </div>
+
+  <p>
+  As of Feb 5th, 2014, these browsers show only lime (i.e. they honor
+  the percent height):
+  <ul>
+    <li>Firefox Nightly (ver 30)</li>
+    <li>IE (ver 11)</li>
+  </ul>
+  ...and these browsers show a bunch of red (i.e. they don't honor
+  the percent height):
+  <ul>
+    <li>Chrome (ver 32.0.1685.0 dev)</li>
+    <li>Opera with Presto (ver 12.16)</li>
+  </ul>
+</body>
+</html>

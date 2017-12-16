@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.outerContainer {
+  height: 400px;
+  background: purple;
+}
+
+.containingBlock {
+  height: 100%;
+  background: red;
+}
+
+.content {
+  background: lime;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+  <div class="outerContainer">
+    <div class="containingBlock">
+      <div class="content">
+        This lime region has "height:100%". If that's honored, no red
+        will be visible.
+        <br><br>
+        (Note that my containing block -- the red region -- <b>also</b> has
+        'height:100%', which may or may not be resolvable as an explicit
+        height for us to resolve <b>our</b> 100% against (depending on how
+        its own containing block is sized.))
+      </div>
+    </div>
+  </div>
+
+  <p>
+  As of Feb 5th, 2014, all browsers I've tested render this without any red;
+  the lime region ends up 400px tall. This is uncontroversial and is
+  purely for comparison against
+  <a href="http://people.mozilla.org/~dholbert/tests/flexbox/compat_tests/percent-height-grandchild-1.html">this other testcase</a>.
+  </p>
+</body>
+</html>
