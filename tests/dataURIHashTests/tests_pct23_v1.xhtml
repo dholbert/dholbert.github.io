@@ -1,0 +1,75 @@
+<!DOCTYPE html [
+  <!ENTITY html-number-one
+    "data:text/html,&lt;html&gt;My sports team is &#37;231!&lt;/html&gt;">
+  <!ENTITY xhtml-number-one
+    "data:application/xhtml+xml,&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;My sports team is &#37;231!&lt;/html&gt;">
+  <!ENTITY svg-number-one
+    "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg'&gt;&lt;text y='25'&gt;My sports team is &#37;231!&lt;/text&gt;&lt;/svg&gt;">
+
+  <!ENTITY svg-use-greenrect
+    "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'&gt;&lt;defs&gt;&lt;rect id='greenRect' height='50' width='300' fill='green'/&gt;&lt;/defs&gt;&lt;text y='30' fill='red'&gt;fail&lt;/text&gt;&lt;use xlink:href='&#37;23greenRect'/&gt;&lt;/svg&gt;">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      iframe, embed, object, img, svg {
+        height: 50px;
+        width: 300px;
+        border-width: 2px;
+        border-style: solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>(A-encoded) Testing '#' (encoded as "%23") <i>in text</i> within a data URI</h2>
+    <p>Here, the data URI includes the text "%231".<br/>
+       <br/>
+       Author's expected result is "My sports team is #1!"</p>
+
+    <table cellpadding="0">
+      <!-- Labels -->
+      <tr>
+        <td></td>
+        <td>HTML </td>
+        <td>XHTML</td>
+        <td>SVG  </td>
+      </tr>
+
+      <!-- Rows of tests -->
+      <tr>
+        <td>&lt;iframe&gt;</td>
+        <td><iframe src="&html-number-one;"></iframe></td>
+        <td><iframe src="&xhtml-number-one;"></iframe></td>
+        <td><iframe src="&svg-number-one;"></iframe></td>
+      </tr>
+      <tr>
+        <td>&lt;img&gt;</td>
+        <td>(not applicable)</td>
+        <td>(not applicable)</td>
+        <td><img src="&svg-number-one;"/></td>
+      </tr>
+    </table>
+
+    <h2>(B-encoded) Testing '#' (encoded as "%23") <i>in markup</i> within a data URI</h2>
+    <p>Here, the data URI includes "&lt;use xlink:href='%23greenRect'/&gt;"<br/>
+       <br/>
+       Author's expected result is a fully-green rect.</p>
+
+    <table cellpadding="0">
+      <tr>
+        <td></td>
+        <td>SVG</td>
+      </tr>
+      <tr>
+        <td>&lt;iframe&gt;</td>
+        <td><iframe src="&svg-use-greenrect;"></iframe></td>
+      </tr>
+      <tr>
+        <td>&lt;img&gt;</td>
+        <td><img src="&svg-use-greenrect;"/></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

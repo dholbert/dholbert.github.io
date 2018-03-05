@@ -1,0 +1,113 @@
+<!DOCTYPE html [
+  <!ENTITY html-number-one
+    "data:text/html,&lt;html&gt;My sports team is #1!&lt;/html&gt;">
+  <!ENTITY xhtml-number-one
+    "data:application/xhtml+xml,&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;My sports team is #1!&lt;/html&gt;">
+  <!ENTITY svg-number-one
+    "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg'&gt;&lt;text y='25'&gt;My sports team is #1!&lt;/text&gt;&lt;/svg&gt;">
+
+  <!ENTITY svg-use-greenrect
+    "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'&gt;&lt;defs&gt;&lt;rect id='greenRect' height='50' width='300' fill='green'/&gt;&lt;/defs&gt;&lt;text y='30' fill='red'&gt;fail&lt;/text&gt;&lt;use xlink:href='#greenRect'/&gt;&lt;/svg&gt;">
+
+  <!ENTITY html-with-hashref
+    "data:text/html,&lt;html&gt;&lt;div style='height:3000px; width: 300px; background: red'&gt;&lt;/div&gt;&lt;div id='target' style='height: 50px; width: 300px; background: green;'&gt;&lt;/div&gt;&lt;div style='height:3000px; width: 300px; background: red'&gt;&lt;/div&gt;&lt;/html&gt;#target">
+  <!ENTITY xhtml-with-hashref
+    "data:application/xhtml+xml,&lt;html xmlns='http://www.w3.org/1999/xhtml'&gt;&lt;div style='height:3000px; width: 300px; background: red'/&gt;&lt;div id='target' style='height: 50px; width: 300px; background: green;'/&gt;&lt;div style='height:3000px; width: 300px; background: red'/&gt;&lt;/html&gt;#target">
+  <!ENTITY svg-with-hashref
+    "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg'&gt;&lt;rect id='target' fill='green' width='300' height='50'/&gt;&lt;/svg&gt;#target">
+
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      iframe, embed, object, img, svg {
+        height: 50px;
+        width: 300px;
+        border-width: 2px;
+        border-style: solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>(A) Testing '#' <i>in text</i> within a data URI</h2>
+    <p>Here, the data URI includes the text "#1".<br/>
+       "Correct" result is a truncated document.<br/>
+       Author's expected result is "My sports team is #1!"</p>
+
+    <table cellpadding="0">
+      <!-- Labels -->
+      <tr>
+        <td></td>
+        <td>HTML </td>
+        <td>XHTML</td>
+        <td>SVG  </td>
+      </tr>
+
+      <!-- Rows of tests -->
+      <tr>
+        <td>&lt;iframe&gt;</td>
+        <td><iframe src="&html-number-one;"></iframe></td>
+        <td><iframe src="&xhtml-number-one;"></iframe></td>
+        <td><iframe src="&svg-number-one;"></iframe></td>
+      </tr>
+      <tr>
+        <td>&lt;img&gt;</td>
+        <td>(not applicable)</td>
+        <td>(not applicable)</td>
+        <td><img src="&svg-number-one;"/></td>
+      </tr>
+    </table>
+
+    <h2>(B) Testing '#' <i>in markup</i> within a data URI</h2>
+    <p>Here, the data URI includes "&lt;use xlink:href='#greenRect'/&gt;"<br/>
+       "Correct" result is a truncated document.<br/>
+       Author's expected result is a fully-green rect.</p>
+
+    <table cellpadding="0">
+      <tr>
+        <td></td>
+        <td>SVG</td>
+      </tr>
+      <tr>
+        <td>&lt;iframe&gt;</td>
+        <td><iframe src="&svg-use-greenrect;"></iframe></td>
+      </tr>
+      <tr>
+        <td>&lt;img&gt;</td>
+        <td><img src="&svg-use-greenrect;"/></td>
+      </tr>
+    </table>
+
+    <h2>(C) Testing '#' <i>in a fragment ID appended to</i> a data URI</h2>
+    <p>Here, the data URI ends with "#target" (which targets an internal
+       element as an initial scroll-target).<br/>
+       Author's expected result (&amp; the correct result) is a fully-green rect, with scrollbars.</p>
+
+    <table cellpadding="0">
+      <!-- Labels -->
+      <tr>
+        <td></td>
+        <td>HTML </td>
+        <td>XHTML</td>
+      </tr>
+
+      <!-- Rows of tests -->
+      <tr>
+        <td>&lt;iframe&gt;</td>
+        <td><iframe src="&html-with-hashref;"></iframe></td>
+        <td><iframe src="&xhtml-with-hashref;"></iframe></td>
+      </tr>
+    </table>
+
+    <h2>(D) Testing &lt;svg:use&gt; directly referencing "data:[...]#target"</h2>
+    <p>Here, we just have directly-embedded SVG content (no iframe/img
+      involved), including "&lt;use xlink:href='data:[...]#target'&gt;"<br/>
+      Author's expected result (&amp; the correct result) is a fully-green rect.</p>
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+      <use xlink:href="&svg-with-hashref;"/>
+    </svg>
+  </body>
+</html>
