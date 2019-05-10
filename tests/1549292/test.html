@@ -5,21 +5,20 @@
   <style>
     html, body { margin: 0; }
     .fixedPos {
-        height: 100%;
-        width: 100%;
         position: fixed;
+        bottom:0;
+        right:0;
         background: lightblue;
-        user-select:all;
-        font: 25pt monospace;
+        font: 20pt monospace;
     }
   </style>
 </head>
 <body>
+  Long-press the text at bottom right of viewport.
   <div class="fixedPos">
-    Long press and choose "select all". Does the bottom right text disappear?
     <div style="background: pink;
                 position:absolute;
-                bottom:0;right:0">LongPressThisText</div>
+                bottom:0;right:0">LongPressMe</div>
   </div>
 </body>
   
