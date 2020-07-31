@@ -1,0 +1,46 @@
+<!-- NOTE: no doctype, which puts us in quirks mode. -->
+<html>
+  <style>
+    .flex {
+        display: flex;
+        border: 3px solid blue;
+        width: 100px;
+    }
+    .item {
+        width: 100px;
+        border: 2px solid lime;
+        align-self: center;
+    }
+    .pct-height {
+        height: 100%;
+        background: red;
+        border: 1px solid black;
+    }
+  </style>
+  <body>
+    I claim the two examples below should render the same; no red should be
+    visible.  The two examples only differ in whether the height of the flex
+    container (blue border) is considered definite; and that difference shouldn't
+    matter to the rendering.
+    <br><br> The flex item (lime border) is what serves as the containing block
+    for the percentage height, so it is the frame whose definiteness actually
+    matters for whether the percentage resolves or not. And it should be
+    considered indefinite <b>in both cases here</b>, because it's got a
+    content-based height and it's not stretched (it has align-self:center).  So
+    there's no reason its definiteness should be influenced by the definiteness
+    of its flex container.
+    <br><br>
+    CASE A: Flex container does <b>not</b> have definite height:
+    <div class="flex" style="min-height: 100px">
+      <div class="item">
+        <div class="pct-height"></div>
+      </div>
+    </div>
+
+    <br><br>
+    CASE B: Flex container <b>does</b> have definite height:
+    <div class="flex" style="height: 100px">
+      <div class="item">
+        <div class="pct-height"></div>
+      </div>
+    </div>
