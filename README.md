@@ -1,2 +1,2 @@
 # dholbert.github.io
-dholbert's GitHub Pages
+dholbert's GitHub Pages.
